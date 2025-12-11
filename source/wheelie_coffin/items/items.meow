@@ -1,0 +1,5 @@
+let wheelie_coffin = mod_get_code_globals("items/wheelie_coffin.meow").construct()
+mod_register_item(wheelie_coffin, "wheelie_coffin")
+
+let wheelie_coffin_plus = mod_get_code_globals("items/wheelie_coffin_upgrade.meow").construct()
+mod_register_item(wheelie_coffin_plus, "wheelie_coffin_upgrade")

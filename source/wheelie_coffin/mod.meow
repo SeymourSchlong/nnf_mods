@@ -1,0 +1,12 @@
+-- Runs when the mod is loaded
+on_load = fun {
+	mod_execute_code("functions.meow")
+	mod_execute_code("sprites/sprites.meow")
+	mod_execute_code("items/items.meow")
+}
+-- Runs when the mod is unloaded
+-- Please clean up any dynamic structures you created here
+-- as to not cause memory leaks
+on_unload = fun {
+
+}
