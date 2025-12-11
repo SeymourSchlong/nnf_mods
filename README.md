@@ -8,5 +8,5 @@ Mods created for Nubby's Number Factory. Intended to be used with skirlez' [g3ma
 * Brings back the old Glass Tony as a separate supervisor.
 ### Old Balogna Tony ([Download](https://github.com/SeymourSchlong/nnf_mods/raw/refs/heads/main/download/old_balogna.zip))
 * Brings back the old Balogna Tony as a separate supervisor.
-### Wheelie Coffin Item ([Download](https://github.com/SeymourSchlong/nnf_mods/raw/refs/heads/main/download/wheelie_coffin_item.zip))
+### Wheelie Coffin Item ([Download](https://github.com/SeymourSchlong/nnf_mods/raw/refs/heads/main/download/wheelie_coffin.zip))
 * Adds the Wheelie Coffin item.
