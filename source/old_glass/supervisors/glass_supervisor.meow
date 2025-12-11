@@ -1,0 +1,148 @@
+construct = fun() {
+	-- Reliable way to get your own mod ID
+	var mod_id = global.cmod.mod_id
+
+	-- Create the supervisor struct
+	var sv = {}
+
+	-- The translation key of the supervisor's name
+	sv.display_name = mod_identifier(mod_id, "glass_supervisor_name");
+
+	-- mod_identifier is a quick way to combine our mod ID and another string with a semicolon.
+	-- So in the call above, the result will be "example_mod:example_supervisor_name"
+
+
+	-- The translation key of the supervisor's description
+	sv.description = mod_identifier(mod_id, "glass_supervisor_desc");
+
+
+
+	-- This is the supervisor's sprite struct.
+	-- You only actually need 2 sprites: idle, which is shown during gameplay,
+	-- and preview, which is shown on the selection screen.
+
+	-- Any states/emotions you don't supply use the idle sprite.
+	
+	sv.sprites = {
+		idle_neutral : spr_SV5IdleNeutral,
+		preview : spr_SVPrev_Glass,
+		angry : spr_SV5Angry,
+		evil : spr_SV5Evil,
+		happy : spr_SV5Happy,
+		head_swivel : spr_SV5HeadSwivel,
+		idle_grimace : spr_SV5IdleGrimace,
+		idle_happy : spr_SV5IdleHappy,
+		idle_sad : spr_SV5IdleSad,
+		idle_weird : spr_SV5IdleWeird,
+		sad : spr_SV5Sad,
+		scream : spr_SV5Scream,
+		talk : spr_SV5Talk,
+	}
+
+
+	sv.clicked_sounds = [
+		au_TonyGlass_VO1,
+		au_TonyGlass_VO2,
+		au_TonyGlass_VO3,
+		au_TonyGlass_VO4
+	];
+	
+	sv.go_sound = au_Tony_VOGo;
+	-- Supervisor selection name color
+	-- Catspeak supports colors in this format: #RRGGBB
+	sv.name_color = #000000
+
+	-- Cost in stars
+	-- Can be set to 0
+	sv.cost = 0
+
+
+	sv.on_create = fun(this) {
+		-- Runs when the run begins
+		-- Create a functional object that will make it so we can only reroll when we have enough money, and subtracts money when we reroll
+		
+		-- Base create event stuffs
+		with (obj_ItemMGMT) {
+			var i = 0;
+			while (i < array_length(self.ItemID)) {
+				if (self.ItemPrice[i] > 0) {
+					self.ItemPrice[i] = floor(self.ItemPrice[i] / 2);
+				}
+				i += 1;
+			}
+		}
+
+		any(obj_ItemMGMT).BaseRerolls = 3;
+
+
+
+		this.glass_helper = instance_create_depth(0, 0, 0, obj_functional_object, {	
+			on_create : fun(this) {
+				
+			},
+			on_draw : fun(this) {
+				
+			},
+			on_step : fun(this) {
+				if (global.GameMode == 1) {
+					var item_manager = any(obj_ItemMGMT);
+
+					var WhatSlot = 1;
+					while (WhatSlot <= 7) {
+						if (item_manager.Item[WhatSlot] != -1 and item_manager.ItemInst[WhatSlot] != -1) {
+							with (item_manager.ItemInst[WhatSlot]) {
+								if (alarm_get(0) == 0) {
+									if (self.MyItemID != 99 and self.MyItemID != 31) {
+										var _Odds = irandom(19);
+										var item_mgmt = any(obj_ItemMGMT);
+										
+										if (_Odds == 1) {
+											item_mgmt.Item[self.WhatSlot] = -1;
+											item_mgmt.ItemInst[self.WhatSlot] = -1;
+											
+											if (self.ItemTemporary == true) {
+												if (item_mgmt.TempMutate[self.WhatSlot] != -1) {
+													instance_activate_object(item_mgmt.TempMutate[self.WhatSlot]);
+													instance_destroy(item_mgmt.TempMutate[self.WhatSlot]);
+													item_mgmt.TempMutate[self.WhatSlot] = -1;
+												}
+												
+												if (item_mgmt.RemItem[self.WhatSlot] != -1) {
+													if (instance_exists(item_mgmt.RemItem[self.WhatSlot])) {
+														instance_activate_object(item_mgmt.RemItem[self.WhatSlot]);
+														instance_destroy(item_mgmt.RemItem[self.WhatSlot]);
+													}
+													
+													item_mgmt.RemItem[self.WhatSlot] = -1;
+												}
+											}
+											
+											scr_FX_ItemExplosion(1);
+											instance_destroy(self);
+										}
+									}
+								}
+							}
+						}
+
+						WhatSlot += 1;
+					}
+				}
+			},
+			name : "glass_helper",
+
+
+		})
+	}
+
+	sv.on_destroy = fun(this) {
+		if (instance_exists(this.glass_helper)) {
+			instance_destroy(glass_helper)
+		}
+	}
+
+
+
+	-- Return our supervisor struct so it can be registered in supervisors.gml
+	return sv;
+}

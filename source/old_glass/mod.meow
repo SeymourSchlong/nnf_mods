@@ -1,0 +1,7 @@
+on_load = fun() {
+	mod_execute_code("functions.meow")
+	mod_execute_code("supervisors/supervisors.meow")
+}
+on_unload = fun() {
+
+}

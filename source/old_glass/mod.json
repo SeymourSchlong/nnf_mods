@@ -4,7 +4,7 @@
     "description" : "Bringing back old Glass Tony",
     "icon_path" : "",
     "credits" : ["seymour"],
-    "version" : "1.0.0",
+    "version" : "1.0.1",
     "target_game_version" : "V1.4.2",
     "target_patcher_version" : "1",
     "depends" : [
@@ -19,7 +19,7 @@
         "forgery" : {
             "entrypoint" : { 
                 "type" : "runtime",
-                "path" : "mod.gml"
+                "path" : "mod.meow"
             },
             "translations_path" : "trans",
             "compile_all_code_on_load" : false

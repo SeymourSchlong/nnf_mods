@@ -1,0 +1,3 @@
+mod_register_function("any", fun(obj) {
+	return instance_find(obj, 0);
+})
