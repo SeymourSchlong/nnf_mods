@@ -1,0 +1,11 @@
+var wheelie_coffin_sprite_path = mod_get_path("sprites/spr_wheelie_coffin.png");
+var wheelie_coffin_sprite = sprite_add(wheelie_coffin_sprite_path, 2, false, false, 48, 48);
+sprite_set_speed(wheelie_coffin_sprite, 10, spritespeed_framespersecond)
+
+mod_register_sprite(wheelie_coffin_sprite, "spr_wheelie_coffin")
+
+var wheelie_coffin_upgrade_sprite_path = mod_get_path("sprites/spr_wheelie_coffin_upgrade.png");
+var wheelie_coffin_upgrade_sprite = sprite_add(wheelie_coffin_upgrade_sprite_path, 2, false, false, 48, 48);
+sprite_set_speed(wheelie_coffin_upgrade_sprite, 10, spritespeed_framespersecond)
+
+mod_register_sprite(wheelie_coffin_upgrade_sprite, "spr_wheelie_coffin_upgrade")

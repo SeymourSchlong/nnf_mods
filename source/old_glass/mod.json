@@ -1,0 +1,28 @@
+{
+    "mod_id" : "old_glass",
+    "display_name" : "Old Glass Tony",
+    "description" : "Bringing back old Glass Tony",
+    "icon_path" : "",
+    "credits" : ["seymour"],
+    "version" : "1.0.0",
+    "target_game_version" : "V1.4.2",
+    "target_patcher_version" : "1",
+    "depends" : [
+        {
+            "mod_id" : "forgery",
+            "versions" : ["1.0"],
+            "order_requirement" : "before_us"
+        }
+    ],
+
+    "custom" : {
+        "forgery" : {
+            "entrypoint" : { 
+                "type" : "runtime",
+                "path" : "mod.gml"
+            },
+            "translations_path" : "trans",
+            "compile_all_code_on_load" : false
+        }
+    }
+}
