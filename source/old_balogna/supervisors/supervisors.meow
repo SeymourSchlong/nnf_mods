@@ -1,0 +1,2 @@
+let balogna_tony = mod_get_code_globals("supervisors/balogna_supervisor.meow").construct()
+mod_register_supervisor(balogna_tony, "balogna_supervisor")
