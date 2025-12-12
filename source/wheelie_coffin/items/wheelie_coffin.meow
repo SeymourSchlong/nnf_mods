@@ -53,7 +53,7 @@ construct = fun {
 	-- 3 - Café Nubby
 
 	-- Do not set it to 3.
-	item.pool = 1
+	item.pool = 2
 
 	-- Price added to the item's base rarity price (can be negative)
 	-- Base rarity prices:
